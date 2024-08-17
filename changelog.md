@@ -1,5 +1,2 @@
 ### Pottery 1.0.1
-- Fixed pot recipes not working in multiplayer 
-
-### Pottery 1.0.0
-- Initial release of Pottery
+- Initial release of Pottery for Minecraft 1.20.5 & 1.20.6

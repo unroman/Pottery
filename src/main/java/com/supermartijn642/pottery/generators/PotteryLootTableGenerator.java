@@ -6,15 +6,15 @@ import com.supermartijn642.pottery.Pottery;
 import com.supermartijn642.pottery.content.PotColor;
 import com.supermartijn642.pottery.content.PotType;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DecoratedPotBlock;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
-import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 
 /**
  * Created 30/11/2023 by SuperMartijn642
@@ -42,7 +42,7 @@ public class PotteryLootTableGenerator extends LootTableGenerator {
                                 .when(BlockLootSubProvider.HAS_NO_SILK_TOUCH)
                                 .otherwise(
                                     LootItem.lootTableItem(block)
-                                        .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("sherds", "BlockEntityTag.sherds"))
+                                        .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(DataComponents.POT_DECORATIONS))
                                 ).build()
                         )
                     );
