@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -24,8 +25,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.level.block.entity.DecoratedPotPatterns;
+import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.ModelData;
@@ -35,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created 27/11/2023 by SuperMartijn642
@@ -43,7 +45,7 @@ public class PotBakedModel implements BakedModel, IDynamicBakedModel {
 
     private static final ResourceLocation DUMMY_PATTERN_SPRITE = new ResourceLocation(Pottery.MODID, "dummy_pattern");
     private static final int BLOCK_VERTEX_DATA_UV_OFFSET = findUVOffset(DefaultVertexFormat.BLOCK);
-    private static final PotData DEFAULT_POT_DATA = new PotData(PotType.DEFAULT, PotColor.BLANK, Direction.NORTH, DecoratedPotBlockEntity.Decorations.EMPTY);
+    private static final PotData DEFAULT_POT_DATA = new PotData(PotType.DEFAULT, PotColor.BLANK, Direction.NORTH, PotDecorations.EMPTY);
     private static final ModelProperty<PotData> MODEL_PROPERTY = new ModelProperty<>();
 
     private final BakedModel original;
@@ -61,7 +63,7 @@ public class PotBakedModel implements BakedModel, IDynamicBakedModel {
 
         PotType type = ((PotBlock)state.getBlock()).getType();
         PotColor color = ((PotBlock)state.getBlock()).getColor();
-        DecoratedPotBlockEntity.Decorations decorations = ((PotBlockEntity)entity).getDecorations();
+        PotDecorations decorations = ((PotBlockEntity)entity).getDecorations();
         Direction facing = state.getValue(PotBlock.HORIZONTAL_FACING);
         return ModelData.builder().with(MODEL_PROPERTY, new PotData(type, color, facing, decorations)).build();
     }
@@ -74,7 +76,8 @@ public class PotBakedModel implements BakedModel, IDynamicBakedModel {
 
         PotType type = ((PotBlock)block).getType();
         PotColor color = ((PotBlock)block).getColor();
-        DecoratedPotBlockEntity.Decorations decorations = DecoratedPotBlockEntity.Decorations.load(BlockItem.getBlockEntityData(stack));
+        PotDecorations decorations = stack.get(DataComponents.POT_DECORATIONS);
+        if(decorations == null) decorations = PotDecorations.EMPTY;
         this.itemModelData = new PotData(type, color, Direction.SOUTH, decorations);
         return List.of(this);
     }
@@ -99,7 +102,7 @@ public class PotBakedModel implements BakedModel, IDynamicBakedModel {
         // Swap pattern
         if(DUMMY_PATTERN_SPRITE.equals(spriteName)){
             // Find the correct decoration for the quad's side of the pot
-            Item decorationItem = DecorationUtils.getDecorationItem(data.decorations, data.facing, quad.getDirection());
+            Item decorationItem = DecorationUtils.getDecorationItem(data.decorations, data.facing, quad.getDirection()).orElse(Items.BRICK);
             ResourceKey<String> decorationKey = DecoratedPotPatterns.getResourceKey(decorationItem);
             if(decorationKey == null)
                 return quad;
@@ -112,9 +115,9 @@ public class PotBakedModel implements BakedModel, IDynamicBakedModel {
         // Swap side
         if(spriteName.getNamespace().equals("pottery") && spriteName.getPath().equals(data.type.getIdentifier() + "/" + data.type.getIdentifier(data.color) + "_side")){
             // Find the correct decoration for the quad's side of the pot
-            Item decorationItem = DecorationUtils.getDecorationItem(data.decorations, data.facing, quad.getDirection());
+            Optional<Item> decorationItem = DecorationUtils.getDecorationItem(data.decorations, data.facing, quad.getDirection());
             // Ignore bricks
-            if(decorationItem != Items.BRICK){
+            if(decorationItem.isPresent()){
                 TextureAtlasSprite target = ClientUtils.getMinecraft().getTextureAtlas(TextureAtlases.getBlocks()).apply(new ResourceLocation(Pottery.MODID, data.type.getIdentifier() + "/" + data.type.getIdentifier(data.color) + "_side_decorated"));
                 return swapSprite(quad, sprite, target);
             }
@@ -199,7 +202,6 @@ public class PotBakedModel implements BakedModel, IDynamicBakedModel {
         return this.original.getOverrides();
     }
 
-    private record PotData(PotType type, PotColor color, Direction facing,
-                           DecoratedPotBlockEntity.Decorations decorations) {
+    private record PotData(PotType type, PotColor color, Direction facing, PotDecorations decorations) {
     }
 }
