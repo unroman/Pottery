@@ -50,6 +50,10 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/magenta/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/lime/blade_pottery_pattern"
     },
     {
@@ -67,6 +71,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/pink/burn_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/red/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -114,6 +122,10 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/red/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/gray/prize_pottery_pattern"
     },
     {
@@ -138,11 +150,19 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/light_gray/scrape_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/orange/arms_up_pottery_pattern"
     },
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/orange/decorated_pot_side"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/yellow/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -187,6 +207,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/cyan/brewer_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/green/flow_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -258,6 +282,14 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/white/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/blue/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/light_blue/miner_pottery_pattern"
     },
     {
@@ -295,6 +327,14 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/red/friend_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/yellow/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/orange/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -383,6 +423,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/magenta/howl_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/orange/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -482,6 +526,14 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/purple/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/light_gray/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/blue/arms_up_pottery_pattern"
     },
     {
@@ -491,6 +543,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/pink/angler_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/pink/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -518,6 +574,10 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/gray/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/light_blue/skull_pottery_pattern"
     },
     {
@@ -526,11 +586,23 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/brown/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/black/plenty_pottery_pattern"
     },
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/blue/blade_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/light_blue/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/gray/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -558,15 +630,27 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/red/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/pink/scrape_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/black/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/green/archer_pottery_pattern"
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/purple/prize_pottery_pattern"
+      "resource": "pottery:patterns/purple/angler_pottery_pattern"
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/purple/angler_pottery_pattern"
+      "resource": "pottery:patterns/purple/prize_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -606,6 +690,10 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/purple/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/green/blade_pottery_pattern"
     },
     {
@@ -642,6 +730,14 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/white/scrape_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/gray/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/green/prize_pottery_pattern"
     },
     {
@@ -663,6 +759,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/gray/sheaf_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/purple/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -754,7 +854,15 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/brown/scrape_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/brown/arms_up_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/light_gray/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -775,6 +883,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/yellow/mourner_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/brown/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -811,6 +923,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/gray/heart_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/white/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -886,11 +1002,15 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/pink/shelter_pottery_pattern"
+      "resource": "pottery:patterns/light_blue/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/pink/decorated_pot_base"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/pink/shelter_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -994,7 +1114,15 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/magenta/scrape_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:wide_pot/wide_pot_light_gray_side_decorated"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/yellow/flow_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1182,6 +1310,10 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/lime/flow_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/magenta/burn_pottery_pattern"
     },
     {
@@ -1199,6 +1331,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:tall_pot/tall_pot_lime_side_decorated"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/magenta/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1251,6 +1387,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/yellow/danger_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/orange/flow_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1318,11 +1458,11 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/lime/decorated_pot_side"
+      "resource": "pottery:patterns/lime/mourner_pottery_pattern"
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/lime/mourner_pottery_pattern"
+      "resource": "pottery:patterns/lime/decorated_pot_side"
     },
     {
       "type": "minecraft:single",
@@ -1331,6 +1471,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/white/angler_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/cyan/flow_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1347,6 +1491,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:small_pot/small_pot_lime_side_decorated"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/cyan/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1379,6 +1527,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/blue/skull_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/black/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1482,6 +1634,10 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/cyan/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/pink/archer_pottery_pattern"
     },
     {
@@ -1499,6 +1655,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/pink/arms_up_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/black/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1522,11 +1682,23 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/white/arms_up_pottery_pattern"
+      "resource": "pottery:patterns/pink/flow_pottery_pattern"
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/red/howl_pottery_pattern"
+      "resource": "pottery:patterns/green/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/lime/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/blue/guster_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/white/arms_up_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1534,7 +1706,15 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/red/howl_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/light_blue/howl_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/blue/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1550,11 +1730,15 @@
     },
     {
       "type": "minecraft:single",
+      "resource": "pottery:patterns/black/friend_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
       "resource": "pottery:patterns/black/danger_pottery_pattern"
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/black/friend_pottery_pattern"
+      "resource": "pottery:patterns/green/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1583,6 +1767,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/light_blue/heart_pottery_pattern"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/lime/scrape_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1743,6 +1931,10 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:sealed_pot/sealed_pot_light_blue_side_decorated"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "pottery:patterns/light_blue/guster_pottery_pattern"
     },
     {
       "type": "minecraft:single",

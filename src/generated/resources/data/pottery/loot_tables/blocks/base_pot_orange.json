@@ -10,21 +10,23 @@
               "conditions": [
                 {
                   "predicate": {
-                    "tag": "minecraft:breaks_decorated_pots"
+                    "items": "#minecraft:breaks_decorated_pots"
                   },
                   "condition": "minecraft:match_tool"
                 },
                 {
                   "term": {
                     "predicate": {
-                      "enchantments": [
-                        {
-                          "enchantment": "minecraft:silk_touch",
-                          "levels": {
-                            "min": 1
+                      "predicates": {
+                        "minecraft:enchantments": [
+                          {
+                            "enchantment": "minecraft:silk_touch",
+                            "levels": {
+                              "min": 1
+                            }
                           }
-                        }
-                      ]
+                        ]
+                      }
                     },
                     "condition": "minecraft:match_tool"
                   },
@@ -38,14 +40,10 @@
               "functions": [
                 {
                   "source": "block_entity",
-                  "ops": [
-                    {
-                      "source": "sherds",
-                      "target": "BlockEntityTag.sherds",
-                      "op": "replace"
-                    }
+                  "include": [
+                    "minecraft:pot_decorations"
                   ],
-                  "function": "minecraft:copy_nbt"
+                  "function": "minecraft:copy_components"
                 }
               ],
               "name": "pottery:base_pot_orange",

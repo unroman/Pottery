@@ -2,17 +2,18 @@ package com.supermartijn642.pottery.content;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.world.level.block.entity.PotDecorations;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -45,14 +46,14 @@ public class PotRecipe extends ShapedRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, RegistryAccess registryAccess){
-        ItemStack stack = super.assemble(container, registryAccess);
+    public ItemStack assemble(CraftingContainer container, HolderLookup.Provider provider){
+        ItemStack stack = super.assemble(container, provider);
 
         // Add the decorations
-        DecoratedPotBlockEntity.Decorations decorations = this.findRecipeDecorations(container);
+        PotDecorations decorations = this.findRecipeDecorations(container);
         Objects.requireNonNull(decorations);
-        if(!decorations.equals(DecoratedPotBlockEntity.Decorations.EMPTY))
-            stack.addTagElement(BlockItem.BLOCK_ENTITY_TAG, decorations.save(new CompoundTag()));
+        if(!decorations.equals(PotDecorations.EMPTY))
+            stack.set(DataComponents.POT_DECORATIONS, decorations);
 
         return stack;
     }
@@ -62,13 +63,13 @@ public class PotRecipe extends ShapedRecipe {
         return SERIALIZER;
     }
 
-    private DecoratedPotBlockEntity.Decorations findRecipeDecorations(CraftingContainer container){
+    private PotDecorations findRecipeDecorations(CraftingContainer container){
         if(!this.canCraftInDimensions(container.getWidth(), container.getHeight()))
             return null;
 
         for(int x = 0; x <= container.getWidth() - this.getWidth(); ++x){
             for(int y = 0; y <= container.getHeight() - this.getHeight(); ++y){
-                DecoratedPotBlockEntity.Decorations decorations = this.matchesSubGrid(container, x, y, true);
+                PotDecorations decorations = this.matchesSubGrid(container, x, y, true);
                 if(decorations == null)
                     decorations = this.matchesSubGrid(container, x, y, false);
                 if(decorations != null)
@@ -78,7 +79,7 @@ public class PotRecipe extends ShapedRecipe {
         return null;
     }
 
-    private DecoratedPotBlockEntity.Decorations matchesSubGrid(CraftingContainer container, int startX, int startY, boolean mirrored){
+    private PotDecorations matchesSubGrid(CraftingContainer container, int startX, int startY, boolean mirrored){
         boolean foundDye = false;
         for(int x = 0; x < container.getWidth(); ++x){
             for(int y = 0; y < container.getHeight(); ++y){
@@ -111,13 +112,13 @@ public class PotRecipe extends ShapedRecipe {
         Item left = container.getItem(startX + this.sherdIndices[1] % this.getWidth() + (startY + this.sherdIndices[1] / this.getWidth()) * container.getWidth()).getItem();
         Item right = container.getItem(startX + this.sherdIndices[2] % this.getWidth() + (startY + this.sherdIndices[2] / this.getWidth()) * container.getWidth()).getItem();
         Item back = container.getItem(startX + this.sherdIndices[3] % this.getWidth() + (startY + this.sherdIndices[3] / this.getWidth()) * container.getWidth()).getItem();
-        return new DecoratedPotBlockEntity.Decorations(back, left, right, front);
+        return new PotDecorations(back, left, right, front);
     }
 
     public static class Serializer implements RecipeSerializer<PotRecipe> {
 
         private static final Function<Integer,DataResult<Integer>> GEQUAL_TO_ZERO = integer -> integer < 0 ? DataResult.error(() -> "Value '" + integer + "' is less than 0!") : DataResult.success(integer);
-        private static final Codec<PotRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        private static final MapCodec<PotRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             ShapedRecipe.Serializer.CODEC.fieldOf("recipe").forGetter(recipe -> null),
             Ingredient.CODEC_NONEMPTY.optionalFieldOf("dye_ingredient").forGetter(recipe -> Optional.of(recipe.dyeIngredient)),
             Codec.INT.flatXmap(GEQUAL_TO_ZERO, GEQUAL_TO_ZERO).listOf().fieldOf("sherds").forGetter(recipe -> IntStream.of(recipe.sherdIndices).boxed().toList())
@@ -130,16 +131,21 @@ public class PotRecipe extends ShapedRecipe {
             dyeIngredient.orElse(null),
             sherdIndices.stream().mapToInt(i -> i).toArray()
         )));
+        private static final StreamCodec<RegistryFriendlyByteBuf,PotRecipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
 
         @Override
-        public Codec<PotRecipe> codec(){
+        public MapCodec<PotRecipe> codec(){
             return CODEC;
         }
 
         @Override
-        public PotRecipe fromNetwork(FriendlyByteBuf buffer){
-            ShapedRecipe shapedRecipe = RecipeSerializer.SHAPED_RECIPE.fromNetwork(buffer);
-            Ingredient dyeIngredient = buffer.readBoolean() ? Ingredient.fromNetwork(buffer) : null;
+        public StreamCodec<RegistryFriendlyByteBuf,PotRecipe> streamCodec(){
+            return STREAM_CODEC;
+        }
+
+        public static PotRecipe fromNetwork(RegistryFriendlyByteBuf buffer){
+            ShapedRecipe shapedRecipe = RecipeSerializer.SHAPED_RECIPE.streamCodec().decode(buffer);
+            Ingredient dyeIngredient = buffer.readBoolean() ? Ingredient.CONTENTS_STREAM_CODEC.decode(buffer) : null;
             int[] sherdIndices = buffer.readVarIntArray(4);
             if(sherdIndices.length != 4)
                 throw new IllegalArgumentException();
@@ -154,12 +160,11 @@ public class PotRecipe extends ShapedRecipe {
             );
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, PotRecipe recipe){
-            RecipeSerializer.SHAPED_RECIPE.toNetwork(buffer, recipe);
+        public static void toNetwork(RegistryFriendlyByteBuf buffer, PotRecipe recipe){
+            RecipeSerializer.SHAPED_RECIPE.streamCodec().encode(buffer, recipe);
             buffer.writeBoolean(recipe.dyeIngredient != null);
             if(recipe.dyeIngredient != null)
-                recipe.dyeIngredient.toNetwork(buffer);
+                Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.dyeIngredient);
             buffer.writeVarIntArray(recipe.sherdIndices);
         }
     }
