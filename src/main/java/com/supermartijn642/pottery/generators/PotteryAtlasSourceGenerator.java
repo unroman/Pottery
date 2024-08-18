@@ -6,7 +6,6 @@ import com.supermartijn642.pottery.Pottery;
 import com.supermartijn642.pottery.content.PotColor;
 import com.supermartijn642.pottery.content.PotType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.entity.DecoratedPotPatterns;
 
 /**
  * Created 30/11/2023 by SuperMartijn642
@@ -32,9 +31,9 @@ public class PotteryAtlasSourceGenerator extends AtlasSourceGenerator {
         for(PotColor color : PotColor.values()){
             if(color == PotColor.BLANK)
                 continue;
-            BuiltInRegistries.DECORATED_POT_PATTERNS.registryKeySet().stream()
-                .filter(key -> key.location().getNamespace().equals("minecraft"))
-                .map(DecoratedPotPatterns::location)
+            BuiltInRegistries.DECORATED_POT_PATTERN.holders()
+                .filter(holder -> holder.key().location().getNamespace().equals("minecraft"))
+                .map(holder -> holder.value().assetId().withPrefix("entity/decorated_pot/"))
                 .forEach(texture -> this.blockAtlas().texture("patterns/" + color.getIdentifier() + "/" + texture.getPath().substring(texture.getPath().lastIndexOf('/') + 1)));
         }
     }

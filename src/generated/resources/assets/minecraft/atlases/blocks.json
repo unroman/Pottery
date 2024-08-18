@@ -14,10 +14,6 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/brown/decorated_pot_base"
-    },
-    {
-      "type": "minecraft:single",
       "resource": "pottery:patterns/gray/brewer_pottery_pattern"
     },
     {
@@ -90,10 +86,6 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/purple/decorated_pot_base"
-    },
-    {
-      "type": "minecraft:single",
       "resource": "pottery:patterns/lime/explorer_pottery_pattern"
     },
     {
@@ -111,10 +103,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/brown/heart_pottery_pattern"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/red/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -175,10 +163,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:sealed_pot/sealed_pot_lime_side_decorated"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/light_blue/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -250,10 +234,6 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/lime/decorated_pot_base"
-    },
-    {
-      "type": "minecraft:single",
       "resource": "pottery:patterns/cyan/angler_pottery_pattern"
     },
     {
@@ -271,14 +251,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/pink/explorer_pottery_pattern"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/cyan/decorated_pot_base"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/light_gray/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -1010,10 +982,6 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/pink/decorated_pot_base"
-    },
-    {
-      "type": "minecraft:single",
       "resource": "pottery:patterns/pink/brewer_pottery_pattern"
     },
     {
@@ -1031,10 +999,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/magenta/heart_pottery_pattern"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/gray/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -1067,10 +1031,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/light_gray/plenty_pottery_pattern"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/black/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -1250,10 +1210,6 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/white/decorated_pot_base"
-    },
-    {
-      "type": "minecraft:single",
       "resource": "pottery:tall_pot/tall_pot_green_side_decorated"
     },
     {
@@ -1366,10 +1322,6 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/orange/decorated_pot_base"
-    },
-    {
-      "type": "minecraft:single",
       "resource": "pottery:patterns/pink/prize_pottery_pattern"
     },
     {
@@ -1391,10 +1343,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/orange/flow_pottery_pattern"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/magenta/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -1503,10 +1451,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:tall_pot/tall_pot_magenta_side_decorated"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/green/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -1702,11 +1646,11 @@
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/red/howl_pottery_pattern"
+      "resource": "pottery:patterns/red/burn_pottery_pattern"
     },
     {
       "type": "minecraft:single",
-      "resource": "pottery:patterns/red/burn_pottery_pattern"
+      "resource": "pottery:patterns/red/howl_pottery_pattern"
     },
     {
       "type": "minecraft:single",
@@ -1755,10 +1699,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/brown/heartbreak_pottery_pattern"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/yellow/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
@@ -1839,10 +1779,6 @@
     {
       "type": "minecraft:single",
       "resource": "pottery:patterns/lime/danger_pottery_pattern"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "pottery:patterns/blue/decorated_pot_base"
     },
     {
       "type": "minecraft:single",
