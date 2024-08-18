@@ -30,7 +30,7 @@ public class PotteryJeiPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid(){
-        return new ResourceLocation(Pottery.MODID, "pot_recipes");
+        return ResourceLocation.fromNamespaceAndPath(Pottery.MODID, "pot_recipes");
     }
 
     @Override

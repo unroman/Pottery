@@ -25,6 +25,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.DecoratedPotPattern;
 import net.minecraft.world.level.block.entity.DecoratedPotPatterns;
 import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,7 +41,7 @@ import java.util.function.Supplier;
  */
 public class PotBakedModel implements BakedModel {
 
-    private static final ResourceLocation DUMMY_PATTERN_SPRITE = new ResourceLocation(Pottery.MODID, "dummy_pattern");
+    private static final ResourceLocation DUMMY_PATTERN_SPRITE = ResourceLocation.fromNamespaceAndPath(Pottery.MODID, "dummy_pattern");
     private static final int BLOCK_VERTEX_DATA_UV_OFFSET = findUVOffset(DefaultVertexFormat.BLOCK);
     private static final PotData DEFAULT_POT_DATA = new PotData(PotType.DEFAULT, PotColor.BLANK, Direction.NORTH, PotDecorations.EMPTY);
 
@@ -115,7 +116,7 @@ public class PotBakedModel implements BakedModel {
         if(DUMMY_PATTERN_SPRITE.equals(spriteName)){
             // Find the correct decoration for the quad's side of the pot
             Item decorationItem = DecorationUtils.getDecorationItem(data.decorations, data.facing, quad.getDirection()).orElse(Items.BRICK);
-            ResourceKey<String> decorationKey = DecoratedPotPatterns.getResourceKey(decorationItem);
+            ResourceKey<DecoratedPotPattern> decorationKey = DecoratedPotPatterns.getPatternFromItem(decorationItem);
             if(decorationKey == null)
                 return quad;
 
@@ -130,7 +131,7 @@ public class PotBakedModel implements BakedModel {
             Optional<Item> decorationItem = DecorationUtils.getDecorationItem(data.decorations, data.facing, quad.getDirection());
             // Ignore bricks
             if(decorationItem.isPresent()){
-                TextureAtlasSprite target = ClientUtils.getMinecraft().getTextureAtlas(TextureAtlases.getBlocks()).apply(new ResourceLocation(Pottery.MODID, data.type.getIdentifier() + "/" + data.type.getIdentifier(data.color) + "_side_decorated"));
+                TextureAtlasSprite target = ClientUtils.getMinecraft().getTextureAtlas(TextureAtlases.getBlocks()).apply(ResourceLocation.fromNamespaceAndPath(Pottery.MODID, data.type.getIdentifier() + "/" + data.type.getIdentifier(data.color) + "_side_decorated"));
                 return swapSprite(quad, sprite, target);
             }
         }
@@ -143,7 +144,7 @@ public class PotBakedModel implements BakedModel {
         // Make sure we don't change the original quad
         vertexData = Arrays.copyOf(vertexData, vertexData.length);
 
-        int vertexSize = DefaultVertexFormat.BLOCK.getIntegerSize();
+        int vertexSize = DefaultVertexFormat.BLOCK.getVertexSize() / 4;
         int vertices = vertexData.length / vertexSize;
         int uvOffset = BLOCK_VERTEX_DATA_UV_OFFSET / 4;
 
@@ -161,22 +162,17 @@ public class PotBakedModel implements BakedModel {
     }
 
     private static int findUVOffset(VertexFormat vertexFormat){
-        int index;
         VertexFormatElement element = null;
-        for(index = 0; index < vertexFormat.getElements().size(); index++){
+        for(int index = 0; index < vertexFormat.getElements().size(); index++){
             VertexFormatElement el = vertexFormat.getElements().get(index);
-            if(el.getUsage() == VertexFormatElement.Usage.UV){
+            if(el.usage() == VertexFormatElement.Usage.UV){
                 element = el;
                 break;
             }
         }
-        if(index == vertexFormat.getElements().size() || element == null)
+        if(element == null)
             throw new RuntimeException("Expected vertex format to have a UV attribute");
-        if(element.getType() != VertexFormatElement.Type.FLOAT)
-            throw new RuntimeException("Expected UV attribute to have data type FLOAT");
-        if(element.getByteSize() < 4)
-            throw new RuntimeException("Expected UV attribute to have at least 4 dimensions");
-        return vertexFormat.offsets.getInt(index);
+        return vertexFormat.getOffset(element);
     }
 
     @Override

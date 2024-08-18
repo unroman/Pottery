@@ -46,12 +46,12 @@ public class PotteryTextureGenerator extends ResourceGenerator {
                     continue;
                 String from = type.getIdentifier() + "/" + type.getIdentifier(PotColor.BLANK);
                 String to = type.getIdentifier() + "/" + type.getIdentifier(color);
-                this.hueShifts.add(Triple.of(new ResourceLocation(Pottery.MODID, from), to, color));
+                this.hueShifts.add(Triple.of(ResourceLocation.fromNamespaceAndPath(Pottery.MODID, from), to, color));
                 this.cache.trackToBeGeneratedResource(ResourceType.ASSET, this.modid, "textures", to, ".png");
                 if(type != PotType.DEFAULT){
-                    this.hueShifts.add(Triple.of(new ResourceLocation(Pottery.MODID, from + "_side"), to + "_side", color));
+                    this.hueShifts.add(Triple.of(ResourceLocation.fromNamespaceAndPath(Pottery.MODID, from + "_side"), to + "_side", color));
                     this.cache.trackToBeGeneratedResource(ResourceType.ASSET, this.modid, "textures", to + "_side", ".png");
-                    this.hueShifts.add(Triple.of(new ResourceLocation(Pottery.MODID, from + "_side_decorated"), to + "_side_decorated", color));
+                    this.hueShifts.add(Triple.of(ResourceLocation.fromNamespaceAndPath(Pottery.MODID, from + "_side_decorated"), to + "_side_decorated", color));
                     this.cache.trackToBeGeneratedResource(ResourceType.ASSET, this.modid, "textures", to + "_side_decorated", ".png");
                 }
             }
@@ -61,9 +61,9 @@ public class PotteryTextureGenerator extends ResourceGenerator {
         for(PotColor color : PotColor.values()){
             if(color == PotColor.BLANK)
                 continue;
-            BuiltInRegistries.DECORATED_POT_PATTERNS.registryKeySet().stream()
-                .filter(key -> key.location().getNamespace().equals("minecraft"))
-                .map(DecoratedPotPatterns::location)
+            BuiltInRegistries.DECORATED_POT_PATTERN.holders()
+                .filter(holder -> holder.key().location().getNamespace().equals("minecraft"))
+                .map(holder -> holder.value().assetId().withPrefix("entity/decorated_pot/"))
                 .forEach(texture -> {
                     String to = "patterns/" + color.getIdentifier() + "/" + texture.getPath().substring(texture.getPath().lastIndexOf('/') + 1);
                     this.hueShifts.add(Triple.of(texture, to, color));

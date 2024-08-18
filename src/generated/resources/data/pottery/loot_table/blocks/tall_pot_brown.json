@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "children": [
+            {
+              "conditions": [
+                {
+                  "predicate": {
+                    "items": "#minecraft:breaks_decorated_pots"
+                  },
+                  "condition": "minecraft:match_tool"
+                }
+              ],
+              "name": "minecraft:sherds",
+              "type": "minecraft:dynamic"
+            },
+            {
+              "functions": [
+                {
+                  "source": "block_entity",
+                  "include": [
+                    "minecraft:pot_decorations"
+                  ],
+                  "function": "minecraft:copy_components"
+                }
+              ],
+              "name": "pottery:tall_pot_brown",
+              "type": "minecraft:item"
+            }
+          ],
+          "type": "minecraft:alternatives"
+        }
+      ]
+    }
+  ]
+}

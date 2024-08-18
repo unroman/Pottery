@@ -30,8 +30,9 @@ public class PotteryClient implements ClientModInitializer {
             }
         }
         // Put all decorated pot patterns into the block atlas
-        BuiltInRegistries.DECORATED_POT_PATTERNS.registryKeySet().stream()
-            .map(DecoratedPotPatterns::location)
+        BuiltInRegistries.DECORATED_POT_PATTERN.holders()
+            .filter(holder -> holder.key().location().getNamespace().equals("minecraft"))
+            .map(holder -> holder.value().assetId().withPrefix("entity/decorated_pot/"))
             .forEach(texture -> handler.registerAtlasSprite(TextureAtlases.getBlocks(), texture));
     }
 }

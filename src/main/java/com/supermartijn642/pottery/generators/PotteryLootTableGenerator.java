@@ -39,7 +39,6 @@ public class PotteryLootTableGenerator extends LootTableGenerator {
                         pool.entry(
                             DynamicLoot.dynamicEntry(DecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID)
                                 .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.BREAKS_DECORATED_POTS)))
-                                .when(BlockLootSubProvider.HAS_NO_SILK_TOUCH)
                                 .otherwise(
                                     LootItem.lootTableItem(block)
                                         .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(DataComponents.POT_DECORATIONS))

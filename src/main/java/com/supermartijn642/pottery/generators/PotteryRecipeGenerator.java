@@ -38,7 +38,7 @@ public class PotteryRecipeGenerator extends ResourceGenerator {
 
     public RecipeBuilder recipe(String location){
         this.cache.trackToBeGeneratedResource(ResourceType.DATA, this.modid, "recipes", location, ".json");
-        return this.recipes.computeIfAbsent(new ResourceLocation(this.modid, location), i -> new RecipeBuilder());
+        return this.recipes.computeIfAbsent(ResourceLocation.fromNamespaceAndPath(this.modid, location), i -> new RecipeBuilder());
     }
 
     @Override
