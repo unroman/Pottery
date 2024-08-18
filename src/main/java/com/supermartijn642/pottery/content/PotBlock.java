@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -233,7 +234,7 @@ public class PotBlock extends BaseBlock implements EntityHoldingBlock, SimpleWat
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player){
         ItemStack stack = player.getMainHandItem();
-        if(stack.is(ItemTags.BREAKS_DECORATED_POTS) && !EnchantmentHelper.hasSilkTouch(stack)){
+        if(stack.is(ItemTags.BREAKS_DECORATED_POTS) && !EnchantmentHelper.hasTag(stack, EnchantmentTags.PREVENTS_DECORATED_POT_SHATTERING)){
             state = state.setValue(CRACKED, true);
             level.setBlock(pos, state, 4);
         }

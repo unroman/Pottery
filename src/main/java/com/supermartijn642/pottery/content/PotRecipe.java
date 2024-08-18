@@ -8,7 +8,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -41,16 +40,16 @@ public class PotRecipe extends ShapedRecipe {
     }
 
     @Override
-    public boolean matches(CraftingContainer container, Level level){
-        return this.findRecipeDecorations(container) != null;
+    public boolean matches(CraftingInput input, Level level){
+        return this.findRecipeDecorations(input) != null;
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, HolderLookup.Provider provider){
-        ItemStack stack = super.assemble(container, provider);
+    public ItemStack assemble(CraftingInput input, HolderLookup.Provider provider){
+        ItemStack stack = super.assemble(input, provider);
 
         // Add the decorations
-        PotDecorations decorations = this.findRecipeDecorations(container);
+        PotDecorations decorations = this.findRecipeDecorations(input);
         Objects.requireNonNull(decorations);
         if(!decorations.equals(PotDecorations.EMPTY))
             stack.set(DataComponents.POT_DECORATIONS, decorations);
@@ -63,15 +62,15 @@ public class PotRecipe extends ShapedRecipe {
         return SERIALIZER;
     }
 
-    private PotDecorations findRecipeDecorations(CraftingContainer container){
-        if(!this.canCraftInDimensions(container.getWidth(), container.getHeight()))
+    private PotDecorations findRecipeDecorations(CraftingInput input){
+        if(!this.canCraftInDimensions(input.width(), input.height()))
             return null;
 
-        for(int x = 0; x <= container.getWidth() - this.getWidth(); ++x){
-            for(int y = 0; y <= container.getHeight() - this.getHeight(); ++y){
-                PotDecorations decorations = this.matchesSubGrid(container, x, y, true);
+        for(int x = 0; x <= input.width() - this.getWidth(); ++x){
+            for(int y = 0; y <= input.height() - this.getHeight(); ++y){
+                PotDecorations decorations = this.matchesSubGrid(input, x, y, true);
                 if(decorations == null)
-                    decorations = this.matchesSubGrid(container, x, y, false);
+                    decorations = this.matchesSubGrid(input, x, y, false);
                 if(decorations != null)
                     return decorations;
             }
@@ -79,11 +78,11 @@ public class PotRecipe extends ShapedRecipe {
         return null;
     }
 
-    private PotDecorations matchesSubGrid(CraftingContainer container, int startX, int startY, boolean mirrored){
+    private PotDecorations matchesSubGrid(CraftingInput input, int startX, int startY, boolean mirrored){
         boolean foundDye = false;
-        for(int x = 0; x < container.getWidth(); ++x){
-            for(int y = 0; y < container.getHeight(); ++y){
-                ItemStack stack = container.getItem(x + y * container.getWidth());
+        for(int x = 0; x < input.width(); ++x){
+            for(int y = 0; y < input.height(); ++y){
+                ItemStack stack = input.getItem(x + y * input.width());
                 if(this.dyeIngredient != null && this.dyeIngredient.test(stack)){
                     if(foundDye)
                         return null;
@@ -108,10 +107,10 @@ public class PotRecipe extends ShapedRecipe {
         if(this.dyeIngredient != null && !foundDye)
             return null;
 
-        Item front = container.getItem(startX + this.sherdIndices[0] % this.getWidth() + (startY + this.sherdIndices[0] / this.getWidth()) * container.getWidth()).getItem();
-        Item left = container.getItem(startX + this.sherdIndices[1] % this.getWidth() + (startY + this.sherdIndices[1] / this.getWidth()) * container.getWidth()).getItem();
-        Item right = container.getItem(startX + this.sherdIndices[2] % this.getWidth() + (startY + this.sherdIndices[2] / this.getWidth()) * container.getWidth()).getItem();
-        Item back = container.getItem(startX + this.sherdIndices[3] % this.getWidth() + (startY + this.sherdIndices[3] / this.getWidth()) * container.getWidth()).getItem();
+        Item front = input.getItem(startX + this.sherdIndices[0] % this.getWidth() + (startY + this.sherdIndices[0] / this.getWidth()) * input.width()).getItem();
+        Item left = input.getItem(startX + this.sherdIndices[1] % this.getWidth() + (startY + this.sherdIndices[1] / this.getWidth()) * input.width()).getItem();
+        Item right = input.getItem(startX + this.sherdIndices[2] % this.getWidth() + (startY + this.sherdIndices[2] / this.getWidth()) * input.width()).getItem();
+        Item back = input.getItem(startX + this.sherdIndices[3] % this.getWidth() + (startY + this.sherdIndices[3] / this.getWidth()) * input.width()).getItem();
         return new PotDecorations(back, left, right, front);
     }
 
