@@ -116,6 +116,8 @@ mixin {
     config "${project.mod_id}.mixins.json"
 }
 
+jar.manifest.attributes "MixinConfigs": "${mod_id}.mixins.json"
+
 // Rename the IntelliJ run configs
 gradle.taskGraph.whenReady {
     tasks.genIntellijRuns.doLast {
