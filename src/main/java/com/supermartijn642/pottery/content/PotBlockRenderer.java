@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,6 +20,8 @@ import net.minecraftforge.client.model.data.ModelData;
  * Created 27/12/2023 by SuperMartijn642
  */
 public class PotBlockRenderer implements CustomBlockEntityRenderer<PotBlockEntity> {
+    private static final RandomSource RANDOM_SOURCE = RandomSource.create();
+
     @Override
     public void render(PotBlockEntity entity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay){
         poseStack.pushPose();
@@ -53,8 +56,10 @@ public class PotBlockRenderer implements CustomBlockEntityRenderer<PotBlockEntit
         BakedModel model = blockRenderer.getBlockModel(state);
         ModelData modelData = model.getModelData(entity.getLevel(), entity.getBlockPos(), state, ModelData.EMPTY);
         Level level = entity.getLevel();
-        for(RenderType renderType : model.getRenderTypes(state, level.random, modelData))
-            blockRenderer.getModelRenderer().tesselateBlock(level, model, state, entity.getBlockPos(), poseStack, bufferSource.getBuffer(renderType), cullFaces, level.random, combinedLight, combinedOverlay, modelData, renderType);
+        long seed = state.getSeed(entity.getBlockPos());
+        RANDOM_SOURCE.setSeed(seed);
+        for(RenderType renderType : model.getRenderTypes(state, RANDOM_SOURCE, modelData))
+            blockRenderer.getModelRenderer().tesselateBlock(level, model, state, entity.getBlockPos(), poseStack, bufferSource.getBuffer(renderType), cullFaces, RANDOM_SOURCE, seed, combinedOverlay, modelData, renderType);
 
         poseStack.popPose();
     }
